@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Muneeb Ur Rehman | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    {/* Consider adding a favicon: <link rel="icon" href="favicon.png" type="image/png"> */}
+    <style>
+        :root {
+            --primary-bg: #1B0B3B; 
+            --secondary-bg: #2D1353; 
+            --accent-color: #E900FF; 
+            --accent-hover-color: #C500D7;
+            --text-primary: #F0E6FF; 
+            --text-secondary: #BCA8DD; 
+            --border-color: #4A237A; 
+            --sidebar-width: 280px;
+        }
+
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            overflow-x: hidden; 
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-hover-color);
+            text-decoration: underline;
+        }
+
+       
+        .vertical-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--primary-bg); 
+            padding: 40px 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-right: 1px solid var(--border-color);
+            box-shadow: 3px 0 15px rgba(0, 0, 0, 0.3); 
+        }
+
+        .sidebar-content {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .vertical-sidebar img.logo {
+            max-width: 120px;
+            height: auto;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px color-mix(in srgb, var(--accent-color) 40%, transparent); 
+        }
+
+        .vertical-sidebar h1 {
+            font-weight: 700;
+            font-size: 22px;
+            line-height: 1.3;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .vertical-sidebar p.tagline {
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            max-width: 220px;
+            margin: 0 auto 20px auto;
+        }
+
+        nav {
+            width: 100%;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            width: 100%;
+        }
+
+        nav ul li {
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        nav ul li a {
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: block;
+            padding: 12px 20px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            text-align: left;
+        }
+        
+        nav ul li a .fa-solid, nav ul li a .fab {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background-color: var(--secondary-bg); 
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Main Content */
+        .main-content-wrapper {
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+        }
+        
+        .container.main-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+            text-align: left;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color); 
+        }
+
+        .card-item {
+            background: var(--secondary-bg); 
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .card-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px color-mix(in srgb, var(--accent-color) 15%, transparent); 
+        }
+        .card-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .experience-item h3,
+        .project-item h3,
+        .certification-item h3 { 
+            font-weight: 600;
+            font-size: 22px;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        .experience-item h3 span,
+        .project-item .tech-stack {
+            display: block;
+            font-weight: 400;
+            font-size: 15px;
+            font-family: 'Roboto Mono', monospace;
+            color: var(--text-secondary);
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+        .project-item .tech-stack i {
+            margin-right: 5px;
+            color: var(--accent-color); 
+        }
+
+        .card-item p, .card-item ul {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .card-item ul:not(.skills-list) { 
+            list-style: none;
+            padding-left: 0;
+            margin-top: 15px;
+        }
+
+        .card-item ul:not(.skills-list) li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+        }
+
+        .card-item ul:not(.skills-list) li::before {
+            content: "\f058"; 
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--accent-color); 
+            font-size: 16px;
+        }
+
+       
+        .skill-category {
+            margin-bottom: 30px; 
+        }
+        .skill-category:last-of-type {
+            margin-bottom: 15px; 
+        }
+
+        .skill-category-title {
+            font-size: 1.15em;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid color-mix(in srgb, var(--border-color) 50%, transparent); /* More subtle border */
+            display: inline-block; /* So border only spans text width */
+        }
+
+        .skills-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .skills-list li { padding-left: 0; margin-bottom: 0;}
+        .skills-list li::before { display: none; }
+
+        .skills-list span.skill-tag {
+            background: #3E1A6A; /* Darker purple for skill tags */
+            padding: 8px 15px;
+            border-radius: 20px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-block;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skills-list span.skill-tag:hover {
+            background: var(--accent-color);
+            color: var(--primary-bg); /* Contrast text on accent bg */
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* Certifications Section Specifics */
+        .certification-item h3 {
+            margin-bottom: 8px; /* Adjusted specific margin for cert title */
+        }
+        .cert-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 20px; /* Row and column gap */
+            align-items: center;
+            font-size: 0.95em;
+            color: var(--text-secondary);
+            margin-bottom: 10px; /* Space below details */
+        }
+        .cert-issuer, .cert-status {
+            display: flex;
+            align-items: center;
+        }
+        .cert-issuer i, .cert-status i {
+            margin-right: 8px;
+            font-size: 1.1em; /* Slightly larger icons */
+        }
+        .cert-status.achieved {
+            color: #76FF03; /* Brighter Green for achieved */
+        }
+        .cert-status.upcoming {
+            color: #FFD600; /* Brighter Amber/Yellow for upcoming */
+        }
+        .cert-status.achieved i { color: #76FF03; }
+        .cert-status.upcoming i { color: #FFD600; }
+        /* Optional: Add a description style if you add descriptions to certs */
+        .cert-description {
+            font-size: 0.9em;
+            line-height: 1.5;
+            margin-top: 10px;
+        }
+
+
+        /* Contacts Section */
+        .contacts {
+            text-align: center;
+        }
+        .contacts .section-title::after {
+             left: 50%;
+             transform: translateX(-50%);
+        }
+
+        .contacts p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+        .contacts p a {
+            font-weight: 500;
+        }
+
+        .contacts .social a {
+            font-size: 28px;
+            color: var(--text-secondary);
+            margin: 0 15px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .contacts .social a:hover {
+            color: var(--accent-color); /* Social icons use accent on hover */
+            transform: scale(1.1);
+            text-decoration: none;
+        }
+
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent-color); /* Accent for BTT button */
+            color: var(--primary-bg); /* Contrast icon */
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 22px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+            border: 2px solid var(--accent-hover-color);
+        }
+
+        #back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #back-to-top:hover {
+            background: var(--accent-hover-color);
+            border-color: var(--accent-color);
+            transform: scale(1.05);
+        }
+        
+        /* Mobile Navigation Toggle (Placeholder for future hamburger menu) */
+        .mobile-nav-toggle {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media only screen and (max-width: 992px) {
+            .vertical-sidebar {
+                width: 100%;
+                height: auto;
+                position: fixed;
+                top:0; left: 0;
+                flex-direction: column;
+                padding: 15px;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                z-index: 1000;
+            }
+            .sidebar-content { display: none; }
+
+            nav {
+                flex-direction: row;
+                justify-content: center;
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+            nav ul {
+                display: flex;
+                flex-direction: row;
+                gap: 5px;
+            }
+            nav ul li {
+                margin: 0;
+                flex-shrink: 0;
+            }
+            nav ul li a {
+                padding: 8px 10px; /* Adjusted padding for more items */
+                font-size: 12px; /* Slightly smaller for more items */
+                text-align: center;
+            }
+            nav ul li a .fa-solid, nav ul li a .fab { display: none; }
+            nav ul li a.download-resume-mobile { display: none; }
+
+
+            .main-content-wrapper {
+                margin-left: 0;
+                padding: 20px;
+                padding-top: 80px;
+            }
+            .container.main-content {
+                max-width: 100%;
+            }
+            
+            section { padding: 60px 0; }
+            .section-title { font-size: 26px; margin-bottom: 30px; }
+            .card-item { padding: 20px; }
+            .experience-item h3, .project-item h3, .certification-item h3 { font-size: 20px; }
+        }
+
+        @media only screen and (max-width: 480px) {
+            .section-title { font-size: 22px; }
+            .card-item p, .card-item ul { font-size: 15px; }
+             nav ul li a { font-size: 11px; padding: 6px 8px;} /* Further reduced for very small screens */
+            .cert-details { flex-direction: column; align-items: flex-start; gap: 5px;} /* Stack cert details on small screens */
+        }
+
+    </style>
+</head>
+<body>
+    <aside class="vertical-sidebar">
+        <div class="sidebar-content">
+            <img src="profile.png" alt="Muhammad Muneeb Ur Rehman" class="logo">
+            <h1>Muhammad Muneeb Ur Rehman</h1>
+            <p class="tagline">ML/AI | DevOps | DevSecOps Engineer</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#intro" class="active"><i class="fa-solid fa-user"></i> Intro</a></li>
+                <li><a href="#experiences"><i class="fa-solid fa-briefcase"></i> Experiences</a></li>
+                <li><a href="#projects"><i class="fa-solid fa-lightbulb"></i> Projects</a></li>
+                <li><a href="#skills"><i class="fa-solid fa-code"></i> Skills</a></li>
+                <li><a href="#certifications"><i class="fa-solid fa-award"></i> Certifications</a></li>
+                <li><a href="#contacts"><i class="fa-solid fa-envelope"></i> Contacts</a></li>
+                <li><a href="resume.pdf" target="_blank" class="download-resume"><i class="fa-solid fa-file-arrow-down"></i> Resume</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <div class="main-content-wrapper">
+        <main class="container main-content">
+            <section class="intro" id="intro">
+                <h2 class="section-title">About Me</h2>
+                <div class="card-item intro-item">
+                    <p>Accomplished AI/ML and MLOps Engineer with 3 years of experience designing, developing, and deploying robust machine learning solutions and streamlining the end-to-end Machine Learning (ML) lifecycle. Proven ability in integrating DevOps and DevSecOps principles to architect and implement secure, scalable, and efficient Continuous Integration/Continuous Delivery (CI/CD) pipelines. Proficient in Python, Amazon Web Services (AWS), containerization technologies (Docker, Kubernetes), and automation tools (e.g., Terraform, Ansible). Seeking to leverage expertise in a forward-thinking organization focused on impactful AI-driven solutions.
+                    </p>
+                </div>
+            </section>
+
+            <section class="experiences" id="experiences">
+                <h2 class="section-title">Experience</h2>
+            
+                <div class="card-item experience-item">
+                    <h3>Software Engineer – ML/AI 
+                        <span>ESNEXUS, McLean, VA | Jan 2023 - May 2024</span>
+                    </h3>
+                    <ul>
+                        <li>Developed and deployed machine learning models (gradient boosting, neural networks) for real-time fraud detection, reducing fraudulent activity by 18% and decreasing false positives by 22%.</li>
+                        <li>Engineered robust data pipelines using Python (Pandas, NumPy, Scikit-learn) and Apache Spark for ingesting, preprocessing, and feature engineering terabytes of transactional and behavioral data.</li>
+                        <li>Implemented MLOps (CI/CD) for fraud models on AWS SageMaker, automating retraining, versioning, and A/B testing, ensuring sustained model accuracy.</li>
+                        <li>Researched and prototyped deep learning architectures (LSTMs, GNNs) with TensorFlow/PyTorch to detect complex fraud patterns, enhancing existing detection capabilities.</li>
+                        <li>Collaborated with data scientists, fraud analysts, and engineers to define requirements, validate models, and integrate AI fraud prevention into production systems.</li>
+                    </ul>
+                </div>
+            
+                <div class="card-item experience-item">
+                    <h3>DevOps Engineer 
+                        <span>Verizon, Remote | June 2024 - August 2024</span>
+                    </h3>
+                    <ul>
+                        <li>Fostered a collaborative environment by encouraging open communication and teamwork among students, mirroring effective team dynamics in technical environments.</li>
+                        <li>Adapted teaching methods to accommodate diverse learning styles, demonstrating flexibility and cooperation—key traits in cross-functional tech teams.</li>
+                        <li>Regularly collaborated with staff and administrators to align lesson plans and goals, showcasing an ability to work effectively within structured team settings.</li>
+                        <li>Acted as tech liaison for staff, helping troubleshoot application logins, software errors, and device issues.</li>
+                        <li>Reinforced strong communication and user-centric support skills in a fast-paced, multi-user environment.</li>
+                    </ul>
+                </div>
+            
+                <div class="card-item experience-item">
+                    <h3>DevSecOps Engineer 
+                        <span>Tech Talent, Ellicott City, MD | Sep 2024 - April 2025</span>
+                    </h3>
+                    <ul>
+                        <li>Integrated automated security testing (SAST, DAST, SCA) with tools like SonarQube, OWASP ZAP, and Snyk into CI/CD pipelines, enabling early vulnerability detection.</li>
+                        <li>Developed security automation and policies for AWS, hardening IAM, network security (Security Groups, WAF), and data encryption protocols.</li>
+                        <li>Secured containerized environments using Docker best practices and Kubernetes security policies (Pod Security Policies, Network Policies), managing secrets with HashiCorp Vault.</li>
+                        <li>Conducted vulnerability assessments, coordinated penetration tests, and performed threat modeling, providing actionable remediation plans to engineering teams.</li>
+                        <li>Ensured adherence to SOC2 and PCI-DSS compliance by automating security controls, evidence collection, and monitoring with tools like AWS Security Hub.</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="projects" id="projects">
+                <h2 class="section-title">Projects</h2>
+            
+                <div class="card-item project-item">
+                    <h3>Credit Card Fraud Detection (Machine Learning Project)</h3>
+                    <p class="tech-stack"><i class="fa-brands fa-python"></i> Python, Scikit-learn, Jupyter Notebook, Matplotlib</p>
+                    <ul>
+                        <li>Developed supervised machine learning models (Logistic Regression, Random Forest, XGBoost) for fraud classification.</li>
+                        <li>Applied data balancing techniques (SMOTE) to handle class imbalance and improve precision-recall.</li>
+                        <li>Achieved 94%+ accuracy; reduced false positives through hyperparameter tuning and threshold optimization.</li>
+                        <li>Utilized Python (Pandas, NumPy, Scikit-learn), Jupyter Notebook, and Matplotlib for model development and visualization.</li>
+                    </ul>
+                </div>
+            
+                <div class="card-item project-item">
+                    <h3>Network Intrusion Detection System (Machine Learning Project)</h3>
+                    <p class="tech-stack"><i class="fa-brands fa-python"></i> Python, Scikit-learn, NSL-KDD, Matplotlib</p>
+                    <ul>
+                        <li>Engineered a machine learning-based intrusion detection system using Random Forest, KNN, and SVM.</li>
+                        <li>Trained models on the NSL-KDD dataset to classify network attacks (DoS, R2L, U2R, Probe).</li>
+                        <li>Conducted feature selection and preprocessing for optimal model performance (92%+ accuracy).</li>
+                    </ul>
+                </div>
+            
+                <div class="card-item project-item">
+                    <h3>Phishing Website Detection (Machine Learning Project)</h3>
+                    <p class="tech-stack"><i class="fa-brands fa-python"></i> Python, Flask, Scikit-learn, BeautifulSoup</p>
+                    <ul>
+                        <li>Built a binary classification model to detect phishing websites using Decision Trees and SVM.</li>
+                        <li>Engineered features including URL structure, domain age, and SSL status for higher accuracy.</li>
+                        <li>Integrated model into a Flask web app for real-time detection.</li>
+                    </ul>
+                </div>
+            
+                <div class="card-item project-item">
+                    <h3>PortScanner (Security Tool)</h3>
+                    <p class="tech-stack"><i class="fa-brands fa-python"></i> Python (socket, threading), CLI</p>
+                    <ul>
+                        <li>Developed a Python-based TCP/UDP port scanner to detect open, closed, and filtered ports.</li>
+                        <li>Implemented multithreading to enhance scan performance and reduce runtime.</li>
+                        <li>Enabled system administrators to audit and monitor network security vulnerabilities.</li>
+                    </ul>
+                </div>
+            
+                <div class="card-item project-item">
+                    <h3>E-commerce Data Analysis</h3>
+                    <p class="tech-stack"><i class="fa-brands fa-python"></i> Python (Pandas, Seaborn)</p>
+                    <ul>
+                        <li>Analyzed customer behavior using Python to reveal product trends and shopping patterns.</li>
+                        <li>Cleaned and transformed large datasets; visualized insights through dynamic plots and charts.</li>
+                        <li>Provided data-backed strategies for marketing and inventory optimization.</li>
+                    </ul>
+                </div>
+            
+                <div class="card-item project-item">
+                    <h3>Telecom Churn Prediction</h3>
+                    <p class="tech-stack"><i class="fa-brands fa-python"></i> Python, Pandas, Seaborn, Scikit-learn</p>
+                    <ul>
+                        <li>Built predictive models using logistic regression and decision trees to identify potential customer churn.</li>
+                        <li>Conducted exploratory data analysis to discover churn factors like service quality and billing disputes.</li>
+                        <li>Improved retention strategies with a model achieving over 90% accuracy.</li>
+                    </ul>
+                </div>
+            
+                <div class="card-item project-item">
+                    <h3>Coffee Shop Sales Analysis</h3>
+                    <p class="tech-stack"><i class="fa-brands fa-python"></i> Python, Excel</p>
+                    <ul>
+                        <li>Analyzed sales trends, customer traffic, and product performance to support business decisions.</li>
+                        <li>Built interactive dashboards using Excel and Python for real-time performance tracking.</li>
+                        <li>Identified peak operating hours and top-selling items.</li>
+                    </ul>
+                </div>
+            
+                <div class="card-item project-item">
+                    <h3>Mason Lost & Found (Web App Project)</h3>
+                    <p class="tech-stack"><i class="fa-brands fa-python"></i> Python, Flask, AWS RDS, HTML/CSS, SQL</p>
+                    <ul>
+                        <li>Developed a Python-Flask web app for lost and found services at George Mason University.</li>
+                        <li>Integrated AWS services (EC2, RDS) for secure, scalable cloud deployment.</li>
+                        <li>Implemented search, submission, and admin features for user-friendly operations.</li>
+                    </ul>
+                </div>
+            
+                <div class="card-item project-item">
+                    <h3>99 House Wash (Business Intelligence Project)</h3>
+                    <p class="tech-stack"><i class="fa-solid fa-chart-simple"></i> Tableau, <i class="fa-brands fa-python"></i> Python, <i class="fa-solid fa-database"></i> SQL</p>
+                    <ul>
+                        <li>Built Tableau dashboards and automated ETL pipelines for business reporting and analytics.</li>
+                        <li>Integrated SQL databases with Python (Pandas, SQLAlchemy) for data transformation.</li>
+                        <li>Cut reporting time by 40% and enhanced data-driven decision-making.</li>
+                    </ul>
+                </div>
+            </section>
+            
+           
+
+            <section class="skills" id="skills">
+                <h2 class="section-title">Skills</h2>
+                <div class="card-item skills-item">
+                    <p>My expertise spans a range of modern technologies, categorized below for clarity:</p>
+
+                    <div class="skill-category">
+                        <h4 class="skill-category-title">Must-Have Core Skills</h4>
+                        <ul class="skills-list">
+                            <li><span class="skill-tag">MLOps</span></li>
+                            <li><span class="skill-tag">DevSecOps</span></li>
+                            <li><span class="skill-tag">Python</span></li>
+                            <li><span class="skill-tag">Kubernetes (K8s)</span></li>
+                            <li><span class="skill-tag">Amazon Web Services (AWS)</span></li>
+                            <li><span class="skill-tag">Docker</span></li>
+                            <li><span class="skill-tag">CI/CD Pipelines</span></li>
+                            <li><span class="skill-tag">DevOps</span></li>
+                            <li><span class="skill-tag">Artificial Intelligence (AI)</span></li>
+                            <li><span class="skill-tag">Machine Learning (ML)</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4 class="skill-category-title">Strong Supporting Technical Skills</h4>
+                        <ul class="skills-list">
+                            <li><span class="skill-tag">Terraform</span></li>
+                            <li><span class="skill-tag">Git</span></li>
+                            <li><span class="skill-tag">TensorFlow / PyTorch</span></li>
+                            <li><span class="skill-tag">Scikit-learn</span></li>
+                            <li><span class="skill-tag">Infrastructure as Code (IaC)</span></li>
+                            <li><span class="skill-tag">Security Automation</span></li>
+                            <li><span class="skill-tag">Model Deployment</span></li>
+                            <li><span class="skill-tag">Cloud Security</span></li>
+                            <li><span class="skill-tag">Linux / Unix</span></li>
+                            <li><span class="skill-tag">API Development / RESTful APIs</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4 class="skill-category-title">Valuable Additional Skills</h4>
+                        <ul class="skills-list">
+                            <li><span class="skill-tag">Monitoring & Observability</span></li>
+                            <li><span class="skill-tag">SAST/DAST</span></li>
+                            <li><span class="skill-tag">Ansible</span></li>
+                            <li><span class="skill-tag">Scripting (Bash/Shell)</span></li>
+                            <li><span class="skill-tag">Data Pipelines</span></li>
+                            <li><span class="skill-tag">Microservices Architecture</span></li>
+                            <li><span class="skill-tag">Agile Methodologies</span></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="certifications" id="certifications">
+                <h2 class="section-title">Certifications</h2>
+                <div class="card-item certification-item">
+                    <h3>AWS Certified Solutions Architect - Associate</h3>
+                    <p class="cert-details">
+                        <span class="cert-issuer"><i class="fa-brands fa-aws"></i> Amazon Web Services</span>
+                        <span class="cert-status achieved"><i class="fa-solid fa-check-circle"></i> Achieved</span>
+                    </p>
+                    <p class="cert-description">
+                        <a href="https://www.credly.com/badges/ced84507-2914-4011-b3d4-811990534267" target="_blank" rel="noopener noreferrer">
+                            View Certificate
+                        </a>
+                    </p>
+                </div>
+                <div class="card-item certification-item">
+                    <h3>AWS Certified DevOps Engineer - Professional</h3>
+                    <p class="cert-details">
+                        <span class="cert-issuer"><i class="fa-brands fa-aws"></i> Amazon Web Services</span>
+                        <span class="cert-status achieved"><i class="fa-solid fa-check-circle"></i> Achieved</span>
+                    </p>
+                    <p class="cert-description">
+                        <a href="https://www.credly.com/badges/55e0801f-2448-4eaa-ac09-9e88bb035794" target="_blank" rel="noopener noreferrer">
+                            View Certificate
+                        </a>
+                    </p>
+                </div>
+                <div class="card-item certification-item">
+                    <h3>Splunk Certified User</h3> <!-- Update this to your specific Splunk certification -->
+                    <p class="cert-details">
+                        <span class="cert-issuer"><i class="fa-solid fa-shield-halved"></i> Splunk</span>
+                        <span class="cert-status achieved"><i class="fa-solid fa-check-circle"></i> Achieved</span>
+                    </p>
+                </div>
+                <div class="card-item certification-item">
+                    <h3>CompTIA Security+</h3>
+                    <p class="cert-details">
+                        <span class="cert-issuer"><i class="fa-solid fa-user-shield"></i> CompTIA</span>
+                        <span class="cert-status upcoming"><i class="fa-solid fa-hourglass-start"></i> Coming Soon</span>
+                    </p>
+                    <!-- Optional: <p class="cert-description">Expected: [Month, Year]</p> -->
+                </div>
+            </section>
+            
+
+            <section class="contacts" id="contacts">
+                <h2 class="section-title">Get In Touch</h2>
+                <p>
+                    Feel free to reach out! You can email me at <a href="mailto:muneeb20chaudhry@outlook.com">muneeb20chaudhry@outlook.com</a>
+                    <br>or call me at <a href="tel:+12792545558">+1 (279) 254-5558</a>.
+                </p>
+                <div class="social">
+                    <a href="https://www.linkedin.com/in/mmr2000/" target="_blank" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/muneebch2000" target="_blank" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <a id="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const sectionsToObserve = document.querySelectorAll(".card-item");
+            const navLinks = document.querySelectorAll(".vertical-sidebar nav a:not(.download-resume)");
+            const mainSections = document.querySelectorAll("main > section");
+
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sectionsToObserve.forEach(section => cardObserver.observe(section));
+
+            const navObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sectionId = entry.target.id;
+                        navLinks.forEach(link => {
+                            link.classList.toggle("active", link.getAttribute("href") === `#${sectionId}`);
+                        });
+                    }
+                });
+            }, { rootMargin: "-30% 0px -70% 0px" }); // Highlights when section is roughly in middle of viewport
+
+            mainSections.forEach(section => {
+                navObserver.observe(section);
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener("click", (e) => {
+                    const href = link.getAttribute("href");
+                    if (href && href.startsWith("#")) {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(href);
+                        if (targetElement) {
+                            let offset = 0;
+                            const mobileNav = document.querySelector('.vertical-sidebar');
+                            if (window.innerWidth <= 992 && getComputedStyle(mobileNav).position === 'fixed') {
+                                offset = mobileNav.offsetHeight;
+                            }
+                            const bodyRect = document.body.getBoundingClientRect().top;
+                            const elementRect = targetElement.getBoundingClientRect().top;
+                            const elementPosition = elementRect - bodyRect;
+                            const offsetPosition = elementPosition - offset;
+
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+        });
+
+        const backToTopButton = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
