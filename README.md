@@ -1,6 +1,6 @@
 # Muneeb — Linux Desktop Security Portfolio
 
-Complete GitHub Pages edition of the portfolio, preserving all five pages, desktop styling, terminal navigation, dock, window controls, appearance preference, project filters, and AI topic explorer.
+Complete GitHub Pages edition of the portfolio, preserving all four main pages, desktop styling, terminal navigation, dock, window controls, appearance preference, project filters, and AI topic explorer.
 
 ## Publish at YOUR_USERNAME.github.io
 
@@ -33,9 +33,9 @@ Open http://localhost:8000/. Use a web server instead of opening HTML directly.
 ## Files
 
 - `index.html`: desktop homepage
-- `expertise/index.html`: security expertise
-- `projects/index.html`: planned lab projects
-- `ai-security/index.html`: searchable AI security knowledge map
+- `expertise/index.html`: AppSec, AI security, threat modeling, offensive, cloud, and network expertise
+- `projects/index.html`: eight planned projects with build steps and completion criteria
+- `ai-security/index.html`: compatibility redirect; the searchable AI knowledge map now lives in Expertise
 - `about/index.html`: background and cloud certifications
 - `styles.css`, `desktop.css`: shared design
 - `app.js`, `desktop.js`: navigation, searches, filters, and desktop interactions
