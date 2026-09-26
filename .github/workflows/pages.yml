@@ -25,7 +25,7 @@ jobs:
         run: |
           mkdir -p _site
           cp index.html styles.css desktop.css app.js desktop.js favicon.svg .nojekyll _site/
-          cp -R expertise projects ai-security about _site/
+          cp -R expertise projects ai-security experience about _site/
       - name: Upload website
         uses: actions/upload-pages-artifact@v4
         with:
