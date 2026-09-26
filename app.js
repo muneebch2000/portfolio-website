@@ -38,3 +38,21 @@ if(experienceButtons.length){
     if(empty)empty.hidden=count>0;
   }));
 }
+
+const expandExperience=document.getElementById('expand-experience');
+if(expandExperience){
+  const syncExperienceExpand=()=>{
+    const visible=[...document.querySelectorAll('.experience-item:not([hidden]) details')];
+    const allOpen=visible.length>0&&visible.every(d=>d.open);
+    expandExperience.textContent=allOpen?'Collapse all':'Expand all';
+    expandExperience.setAttribute('aria-expanded',String(allOpen));
+  };
+  expandExperience.addEventListener('click',()=>{
+    const shouldOpen=expandExperience.getAttribute('aria-expanded')!=='true';
+    document.querySelectorAll('.experience-item:not([hidden]) details').forEach(d=>d.open=shouldOpen);
+    syncExperienceExpand();
+  });
+  document.querySelectorAll('.experience-item details').forEach(d=>d.addEventListener('toggle',syncExperienceExpand));
+  document.querySelectorAll('[data-experience-filter]').forEach(b=>b.addEventListener('click',syncExperienceExpand));
+  syncExperienceExpand();
+}
