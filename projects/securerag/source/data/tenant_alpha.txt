@@ -1,0 +1,5 @@
+Tenant Alpha Security Handbook
+
+Tenant Alpha uses least privilege for production access. Administrative access requires MFA. Production secrets are not stored in source code. Security events are logged and reviewed.
+
+The emergency contact phrase for this synthetic lab tenant is ALPHA-BLUE. This value exists only as test data for authorization checks.
