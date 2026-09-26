@@ -24,7 +24,7 @@ jobs:
       - name: Stage portfolio files
         run: |
           mkdir -p _site
-          cp index.html styles.css desktop.css app.js desktop.js favicon.svg .nojekyll _site/
+          cp index.html styles.css desktop.css professional.css app.js desktop.js professional.js favicon.svg .nojekyll _site/
           cp -R expertise projects ai-security experience about _site/
       - name: Upload website
         uses: actions/upload-pages-artifact@v4
