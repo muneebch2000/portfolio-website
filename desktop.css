@@ -2,3 +2,33 @@
 @media(min-width:1500px){.workspace-windows{padding-top:180px}.desktop-stage{min-height:860px}}@media(max-width:1050px){.workspace-windows{width:83%;margin-left:13%;padding-top:130px}.welcome-body{padding:30px 24px}.welcome-body h1{font-size:3rem}.desktop-shortcuts{left:1%}.desktop-shortcut{width:80px}.system-workspace{display:none}}@media(max-width:760px){.system-panel{padding:0 16px;height:33px}.system-right{gap:14px}.system-right button span{display:none}.system-name{font-size:.65rem}.system-right time{font-size:.64rem}.desktop-stage{height:auto;max-height:none;min-height:0;padding:40px 16px 75px}.desktop-stage:after{inset:12px}.desktop-caption{position:static;display:block;margin:0 4px 26px;font-size:.61rem}.desktop-caption span:last-child{display:none}.wallpaper-type{top:95px;left:15px;font-size:5.8rem}.desktop-shortcuts{position:relative;left:auto;top:auto;display:flex;flex-direction:row;justify-content:flex-start;gap:16px;margin-bottom:25px}.desktop-shortcut{width:80px}.desktop-shortcut>span{width:40px;height:40px}.desktop-shortcut b{font-size:.67rem}.workspace-windows{display:block;width:100%;margin:0;padding:0}.welcome-window{margin:0 6px 25px 0}.welcome-body{padding:30px 24px}.welcome-body h1{font-size:2.75rem}.welcome-body p{font-size:.96rem}.profile-overline{font-size:.65rem}.window-handle{cursor:default;touch-action:auto}.window-controls button[data-window-action=maximize]{display:none}#console-window{margin:0 0 0 6px;width:calc(100% - 6px)}#console-window .terminalbody{padding:23px;min-height:310px}.desktop-bottom{position:static;display:block;margin:28px 8px 0;font-size:.66rem}.desktop-bottom>div{margin-top:14px;justify-content:space-between}.desktop-window.is-maximized{position:relative!important;inset:auto!important}.app-dock{gap:6px;padding:8px 9px;bottom:11px;border-radius:13px}.dock-app{width:39px;height:39px;border-radius:8px}.dock-app svg{width:21px;height:21px}.dock-divider{margin:0}.document-bar{width:calc(100% - 32px);margin-top:20px;font-size:.65rem}.document-bar>span:last-child{display:none}.editor-status{font-size:.59rem}.editor-status span:first-child{overflow:hidden;text-overflow:ellipsis}.navlinks a{padding:8px 0 12px}.footer-grid{padding-bottom:15px}.desktop-window{transform:none!important}}
 @media(prefers-reduced-motion:reduce){.dock-app,.portal{transition:none}.dock-app:hover{transform:none}}
 .system-panel,.system-name,.system-right time,.system-right button,.desktop-caption,.desktop-shortcut b,.profile-overline,.editor-toolbar,.editor-mode,.welcome-tags span,.editor-status,.desktop-bottom,#restore-windows,.dock-app span,.document-bar,.document-bar>span:last-child,.terminal-hint{font-size:.75rem}.desktop-caption{letter-spacing:.06em}.system-workspace{font-size:.75rem}.window-title,.terminalbar{font-size:.8rem}.welcome-body p{font-size:1rem}
+
+/* Projects page centering fix */
+body[data-page="projects"] .pagehero{
+  text-align:center;
+  max-width:1000px;
+  margin-left:auto;
+  margin-right:auto;
+  padding-top:56px;
+  padding-bottom:46px;
+}
+body[data-page="projects"] .pagehero .breadcrumb,
+body[data-page="projects"] .pagehero .label{
+  text-align:center;
+}
+body[data-page="projects"] .pagehero>p{
+  max-width:820px;
+  margin-left:auto;
+  margin-right:auto;
+}
+body[data-page="projects"] .scope{
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+}
+@media(max-width:760px){
+  body[data-page="projects"] .pagehero{
+    padding-top:38px;
+    padding-bottom:32px;
+  }
+}
