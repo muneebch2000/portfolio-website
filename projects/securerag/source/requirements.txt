@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+chromadb
+openai
+python-dotenv
+python-multipart
+httpx
+pytest
