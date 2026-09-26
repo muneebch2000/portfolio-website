@@ -1,0 +1,5 @@
+Tenant Beta Internal Notes
+
+Tenant Beta requires approvals for privileged changes. Backup access is limited to the operations group. Audit logs are retained for security review.
+
+The synthetic recovery phrase for this lab tenant is BETA-GREEN. This value exists only as test data for authorization checks.
