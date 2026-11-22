@@ -25,3 +25,52 @@
     }));
   }
 })();
+// The illustration follows the chapter closest to the reading position.
+(() => {
+  const visual = document.querySelector('.story-visual');
+  if (!visual) return;
+  const chapters = [...document.querySelectorAll('.story-chapter')];
+  const motionButton = document.querySelector('.motion-toggle');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let paused = reducedMotion.matches;
+  let scheduled = false;
+
+  function updateMotion() {
+    document.body.classList.toggle('motion-paused', paused);
+    motionButton.setAttribute('aria-pressed', String(paused));
+    motionButton.textContent = paused ? 'Resume animation' : 'Pause animation';
+  }
+
+  function updateChapter() {
+    scheduled = false;
+    const readingPosition = window.innerHeight * 0.55;
+    const active = chapters.reduce((closest, chapter) => {
+      const distance = Math.abs(chapter.getBoundingClientRect().top - readingPosition);
+      return distance < closest.distance ? { chapter, distance } : closest;
+    }, { chapter: chapters[0], distance: Infinity }).chapter;
+    if (visual.dataset.scene === active.dataset.scene) return;
+    visual.dataset.scene = active.dataset.scene;
+    visual.querySelector('.core-symbol').textContent = active.dataset.symbol;
+    visual.querySelector('.core-label').textContent = active.dataset.label;
+    visual.querySelector('.scene-caption').textContent = active.dataset.caption;
+  }
+
+  function scheduleUpdate() {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(updateChapter);
+  }
+
+  motionButton.addEventListener('click', () => {
+    paused = !paused;
+    updateMotion();
+  });
+  reducedMotion.addEventListener('change', event => {
+    paused = event.matches;
+    updateMotion();
+  });
+  window.addEventListener('scroll', scheduleUpdate, { passive: true });
+  window.addEventListener('resize', scheduleUpdate);
+  updateMotion();
+  updateChapter();
+})();
