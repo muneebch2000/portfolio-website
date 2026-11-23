@@ -45,7 +45,8 @@
     scheduled = false;
     const readingPosition = window.innerHeight * 0.55;
     const active = chapters.reduce((closest, chapter) => {
-      const distance = Math.abs(chapter.getBoundingClientRect().top - readingPosition);
+      const bounds = chapter.getBoundingClientRect();
+      const distance = Math.abs(bounds.top + bounds.height / 2 - readingPosition);
       return distance < closest.distance ? { chapter, distance } : closest;
     }, { chapter: chapters[0], distance: Infinity }).chapter;
     if (visual.dataset.scene === active.dataset.scene) return;
